@@ -2,8 +2,8 @@ import java.util.List;
 
 public class FirstFloor implements Floor {
     private boolean butonUp;
-    public List<Passenger> passengerList;
-    private int number ;
+    private List<Passenger> passengerList;
+    private int number;
 
     public FirstFloor(boolean butonUp, List<Passenger> passengerList, int number) {
         this.butonUp = butonUp;

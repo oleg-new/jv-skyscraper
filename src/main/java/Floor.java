@@ -5,29 +5,36 @@ public interface Floor {
     int number = 0;
     boolean butonUp = false;
     boolean butonDown = false;
-     default boolean isButonUp() {
-         return false;
-     }
+    default boolean isButonUp() {
+        return false;
+    }
 
-     default void setButonUp(boolean butonUp) {}
+    default void setButonUp(boolean butonUp) {
 
-     default boolean isButonDown() {
-         return false;
-     }
+    }
 
-     default void setButonDown(boolean butonDown) {}
+    default boolean isButonDown() {
+        return false;
+    }
 
-     default List<Passenger> getPassengerList() {
-         return null;
-     }
+    default void setButonDown(boolean butonDown) {
 
-     default void setPassengerList(List<Passenger> passengerList) {}
+    }
 
-     default int getNumber() {
-         return 0;
-     }
+    default List<Passenger> getPassengerList() {
+        return null;
+    }
 
-     default void setNumber(int number) {}
+    default void setPassengerList(List<Passenger> passengerList) {
 
+    }
+
+    default int getNumber() {
+        return 0;
+    }
+
+    default void setNumber(int number) {
+
+    }
 
 }

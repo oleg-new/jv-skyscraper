@@ -1,13 +1,14 @@
 import java.util.List;
 
 public class Elevator {
-    public List<Passenger> passengers;
+    private List<Passenger> passengers;
     private int currentFloor;
     private int destination;
 
     private Directions directions;
 
-    public Elevator(int currentFloor, int destination, Directions directions, List<Passenger> passengers) {
+    public Elevator(int currentFloor, int destination,
+                    Directions directions, List<Passenger> passengers) {
         this.currentFloor = currentFloor;
         this.destination = destination;
         this.directions = directions;
