@@ -45,4 +45,15 @@ public class Elevator {
     public void setDestination(int destination) {
         this.destination = destination;
     }
+
+    @Override
+    public String toString() {
+
+        return "Elevator{"
+                + "  passengers=" + passengers.toString()
+                + ", currentFloor=" + currentFloor
+                + ", destination=" + destination
+                + ", direction=" + direction
+                + '}';
+    }
 }

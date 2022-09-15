@@ -6,7 +6,8 @@ public class AverageFloor implements Floor {
     private List<Passenger> passengerList;
     private int number;
 
-    public AverageFloor(boolean butonUp, boolean butonDown, List<Passenger> passengerList, int number) {
+    public AverageFloor(boolean butonUp, boolean butonDown,
+                        List<Passenger> passengerList, int number) {
         this.butonUp = butonUp;
         this.butonDown = butonDown;
         this.passengerList = passengerList;
@@ -43,5 +44,15 @@ public class AverageFloor implements Floor {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "AverageFloor{"
+                + "  butonUp=" + butonUp
+                + ", butonDown=" + butonDown
+                + ",  passengerList=" + passengerList.toString()
+                + ",  number=" + number
+                + '}';
     }
 }

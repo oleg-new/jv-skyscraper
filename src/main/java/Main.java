@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     private static final int NUMBER_OF_FLOOR = getRandomInt(5, 6);
@@ -18,15 +19,23 @@ public class Main {
         Elevator elevator = new Elevator(1, 1, Direction.UP, new ArrayList<>());
         int currentFloor = 1;
         while (true) {
-            System.out.println(elevator);
-            if (elevator.passengers.isEmpty() || elevator.passengers.size() < 5) {
-                addPassengerToElevator(elevator,currentFloor);
+            currentFloor = elevator.getCurrentFloor();
+            System.out.println("step 1 - passenger boarding");
+            printInfo(elevator);
+            if (elevator.passengers.isEmpty() || elevator.passengers.size() <= 5) {
+                addPassengerToElevator(elevator, elevator.getCurrentFloor(), floorArray);
             }
             pushButtonsUpDown();
+            System.out.println("step 2 - choice of direction");
+            printInfo(elevator);
             getNextFloor(elevator, currentFloor);
             elevator.setCurrentFloor(elevator.getDestination());
+            currentFloor = elevator.getCurrentFloor();
+            changeOfDirection(elevator);
+            System.out.println("step 3 -lift interruption");
+            printInfo(elevator);
             goOut(elevator);
-            System.out.println(elevator);
+
         }
     }
 
@@ -48,9 +57,9 @@ public class Main {
         }
         return currentList;
     }
-    private static void addPassengerToElevator(Elevator elevator, int numberFloor){
+    private static void addPassengerToElevator(Elevator elevator, int numberFloor,Floor[] floorArray){
         int iter = numberFloor - 1;
-            for (int i = 0; i < floorArray[iter].getPassengerList().size(); i++){
+            for (int i = floorArray[iter].getPassengerList().size()-1; i >=0 ; i--){
                 if (elevator.getDirection() == Direction.UP && floorArray[iter].getPassengerList().get(i).getDestination() > numberFloor){
                     elevator.passengers.add(floorArray[iter].getPassengerList().get(i));
                     floorArray[iter].getPassengerList().remove(i);
@@ -59,8 +68,8 @@ public class Main {
                         return;
                     }
                 }
-                if (elevator.getDirection() == Direction.DOWN && floorArray[numberFloor].getPassengerList().get(i).getDestination() < numberFloor ){
-                    elevator.passengers.add(floorArray[numberFloor].getPassengerList().get(i));
+                if (elevator.getDirection() == Direction.DOWN && floorArray[iter].getPassengerList().get(i).getDestination() < numberFloor ){
+                    elevator.passengers.add(floorArray[iter].getPassengerList().get(i));
                     floorArray[iter].getPassengerList().remove(i);
                     floorArray[iter].setButonDown(false);
                     if (elevator.passengers.size() == 5){
@@ -79,7 +88,7 @@ public class Main {
                         destination = current.getDestination();
                     }
                 }
-                if ( destination == NUMBER_OF_FLOOR +1 || elevator.passengers.size() < 5) {
+                if ( destination == NUMBER_OF_FLOOR +1 ) {
                     destination = getPressedButtonUp(numberFloor);
                     if ( destination == NUMBER_OF_FLOOR +1){
                         elevator.setDirection(Direction.DOWN);
@@ -96,7 +105,7 @@ public class Main {
                         destination = current.getDestination();
                     }
                 }
-                if(destination == 0 || elevator.passengers.size() < 5){
+                if(destination == 0){
                     destination = getPressedButtonDown(numberFloor);
                     if (destination == 0){
                         elevator.setDirection(Direction.UP);
@@ -129,6 +138,14 @@ public class Main {
         }
         return result;
     }
+    private static void changeOfDirection(Elevator elevator) {
+        if (elevator.getCurrentFloor() == 1) {
+            elevator.setDirection(Direction.UP);
+        }
+        if (elevator.getCurrentFloor() == NUMBER_OF_FLOOR) {
+            elevator.setDirection(Direction.DOWN);
+        }
+    }
     private static void pushButtonsUpDown() {
         for (Floor currentFloor : floorArray) {
             for (Passenger currentPassenger : currentFloor.getPassengerList()) {
@@ -144,7 +161,7 @@ public class Main {
     private static void goOut(Elevator elevator){
         int currentFloor = elevator.getCurrentFloor();
         int leg = elevator.passengers.size();
-        for (int i = 0; i < leg; i++){
+        for (int i = leg -1; i >= 0; i--){
             if (elevator.passengers.get(i).getDestination() == currentFloor) {
                 elevator.passengers.get(i).setDestination(getRandomIntWithoutNumber(1, NUMBER_OF_FLOOR, currentFloor));
                 floorArray[currentFloor - 1].getPassengerList().add(elevator.passengers.get(i));
@@ -160,5 +177,37 @@ public class Main {
         }*/
 
 
+    }
+    private static void printInfo(Elevator elevator){
+        StringBuilder elevatorString = new StringBuilder();
+        Scanner in = new Scanner(System.in);
+        StringBuilder floorString;
+        if (elevator.getDirection() == Direction.UP) {
+            elevatorString.append(" /\\ ");
+        } else {
+            elevatorString.append(" \\/ ");
+        }
+        for (int e = 0; e < elevator.passengers.size(); e++){
+            elevatorString.append(elevator.passengers.get(e).getDestination());
+        }
+        for(int i = floorArray.length-1; i >= 0; i--){
+            floorString  = new StringBuilder();
+            for (int j = 0; j < floorArray[i].getPassengerList().size(); j++){
+                floorString.append(floorArray[i].getPassengerList().get(j).getDestination());
+                floorString.append(" ");
+            }
+            if (floorArray[i].getPassengerList().size() < 20){
+                for(int f = 0; f < 20 - floorArray[i].getPassengerList().size(); f++){
+                    floorString.append("  ");
+                }
+            }
+            if ( floorArray[i].getNumber() != elevator.getCurrentFloor()){
+                System.out.println("floor " +  floorArray[i].getNumber() + " | " +  floorString.toString() + "|");
+            } else {
+                System.out.println("floor " + floorArray[i].getNumber() + " | " + floorString.toString() + "|" + elevatorString.toString());
+            }
+        }
+        System.out.print("Press Enter ");
+        in.nextLine();
     }
 }
