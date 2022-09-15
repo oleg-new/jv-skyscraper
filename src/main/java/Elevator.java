@@ -5,12 +5,12 @@ public class Elevator {
     private int currentFloor;
     private int destination;
 
-    private Direction direction;
+    private Directions directions;
 
-    public Elevator(int currentFloor, int destination, Direction direction, List<Passenger> passengers) {
+    public Elevator(int currentFloor, int destination, Directions directions, List<Passenger> passengers) {
         this.currentFloor = currentFloor;
         this.destination = destination;
-        this.direction = direction;
+        this.directions = directions;
         this.passengers = passengers;
     }
 
@@ -30,12 +30,12 @@ public class Elevator {
         this.currentFloor = currentFloor;
     }
 
-    public Direction getDirection() {
-        return direction;
+    public Directions getDirection() {
+        return directions;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    public void setDirection(Directions directions) {
+        this.directions = directions;
     }
 
     public int getDestination() {
@@ -53,7 +53,7 @@ public class Elevator {
                 + "  passengers=" + passengers.toString()
                 + ", currentFloor=" + currentFloor
                 + ", destination=" + destination
-                + ", direction=" + direction
+                + ", direction=" + directions
                 + '}';
     }
 }
