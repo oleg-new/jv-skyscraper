@@ -215,8 +215,20 @@ public class Main {
         for (int i = floorArray.length - 1; i >= 0; i--) {
             floorNumberString = new StringBuilder();
             floorNumberString.append("floor " + floorArray[i].getNumber());
-            if (floorArray[i].getNumber() < 10){
+            if (floorArray[i].getNumber() < 10) {
                 floorNumberString.append(" ");
+            }
+            if (floorArray[i].isButonDown() && floorArray[i].isButonUp()) {
+                floorNumberString.append("|   /\\ | \\/ ");
+            }
+            if (!floorArray[i].isButonDown() && !floorArray[i].isButonUp()) {
+                floorNumberString.append("|      |    ");
+            }
+            if (!floorArray[i].isButonDown() && floorArray[i].isButonUp()) {
+                floorNumberString.append("|   /\\ |    ");
+            }
+            if (floorArray[i].isButonDown() && !floorArray[i].isButonUp()) {
+                floorNumberString.append("|      | \\/ ");
             }
             floorString = new StringBuilder();
             for (int j = 0; j < floorArray[i].getPassengerList().size(); j++) {
