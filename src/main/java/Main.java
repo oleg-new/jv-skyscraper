@@ -9,13 +9,13 @@ public class Main {
     private static final Floor[] floorArray = new Floor[NUMBER_OF_FLOOR];
 
     public static void main(String[] args) {
-        floorArray[0] = new FirstFloor(false,createListPassenger(1),1);
+        floorArray[0] = new FirstFloorImpl(false,createListPassenger(1),1);
         for (int i = 1; i < MAX_INDEX_FLOOR; i++) {
             int floor = i + 1;
-            floorArray[i] = new AverageFloor(false,false,createListPassenger(i + 1),i + 1);
+            floorArray[i] = new AverageFloorImpl(false,false,createListPassenger(i + 1),i + 1);
         }
         floorArray[MAX_INDEX_FLOOR] =
-                new LastFloor(false,createListPassenger(NUMBER_OF_FLOOR), NUMBER_OF_FLOOR);
+                new LastFloorImpl(false,createListPassenger(NUMBER_OF_FLOOR), NUMBER_OF_FLOOR);
         Elevator elevator = new Elevator(1, 1, Directions.UP, new ArrayList<>());
         elevator.setCurrentFloor(1);
         while (true) {

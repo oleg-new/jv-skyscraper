@@ -1,13 +1,13 @@
 import java.util.List;
 
-public class AverageFloor implements Floor {
+public class AverageFloorImpl implements Floor {
     private boolean butonUp;
     private boolean butonDown;
     private List<Passenger> passengerList;
     private int number;
 
-    public AverageFloor(boolean butonUp, boolean butonDown,
-                        List<Passenger> passengerList, int number) {
+    public AverageFloorImpl(boolean butonUp, boolean butonDown,
+                            List<Passenger> passengerList, int number) {
         this.butonUp = butonUp;
         this.butonDown = butonDown;
         this.passengerList = passengerList;

@@ -1,11 +1,11 @@
 import java.util.List;
 
-public class LastFloor implements Floor {
+public class LastFloorImpl implements Floor {
     private boolean butonDown;
     private List<Passenger> passengerList;
     private int number;
 
-    public LastFloor(boolean butonDown, List<Passenger> passengerList, int number) {
+    public LastFloorImpl(boolean butonDown, List<Passenger> passengerList, int number) {
         this.butonDown = butonDown;
         this.passengerList = passengerList;
         this.number = number;
