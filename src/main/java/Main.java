@@ -202,6 +202,7 @@ public class Main {
     private static void printInfo(Elevator elevator) {
         StringBuilder elevatorString = new StringBuilder();
         StringBuilder floorString;
+        StringBuilder floorNumberString;
         if (elevator.getDirection() == Directions.UP) {
             elevatorString.append(" /\\ ");
         } else {
@@ -212,10 +213,18 @@ public class Main {
             elevatorString.append(" ");
         }
         for (int i = floorArray.length - 1; i >= 0; i--) {
+            floorNumberString = new StringBuilder();
+            floorNumberString.append("floor " + floorArray[i].getNumber());
+            if (floorArray[i].getNumber() < 10){
+                floorNumberString.append(" ");
+            }
             floorString = new StringBuilder();
             for (int j = 0; j < floorArray[i].getPassengerList().size(); j++) {
                 floorString.append(floorArray[i].getPassengerList().get(j).getDestination());
                 floorString.append(" ");
+                if (floorArray[i].getPassengerList().get(j).getDestination() < 10) {
+                    floorString.append(" ");
+                }
             }
             if (floorArray[i].getPassengerList().size() < 20) {
                 for (int f = 0; f < 20 - floorArray[i].getPassengerList().size(); f++) {
@@ -223,10 +232,10 @@ public class Main {
                 }
             }
             if (floorArray[i].getNumber() != elevator.getCurrentFloor()) {
-                System.out.println("floor " + floorArray[i].getNumber()
+                System.out.println(floorNumberString
                         + " | " + floorString.toString() + "|");
             } else {
-                System.out.println("floor " + floorArray[i].getNumber()
+                System.out.println(floorNumberString
                         + " | " + floorString.toString() + "|" + elevatorString.toString());
             }
         }
