@@ -27,7 +27,7 @@ public class Main {
             pushButtonsUpDown();
             System.out.println("step 2 - choice of direction");
             printInfo(elevator);
-            getNextFloor(elevator, elevator.getCurrentFloor());
+            getNextFloor(elevator);
             elevator.setCurrentFloor(elevator.getDestination());
             changeOfDirection(elevator);
             System.out.println("step 3 -lift interruption");
@@ -84,21 +84,26 @@ public class Main {
         }
     }
 
-    private static void getNextFloor(Elevator elevator, int numberFloor) {
+    private static void getNextFloor(Elevator elevator) {
         while (elevator.getCurrentFloor() == elevator.getDestination()) {
             int destination;
             if (elevator.getDirection() == Directions.UP) {
                 destination = NUMBER_OF_FLOOR + 1;
                 for (Passenger current : elevator.getPassengers()) {
-                    if (current.getDestination() > numberFloor
-                            && current.getDestination() < destination) {
+                    if (current.getDestination() < destination) {
                         destination = current.getDestination();
                     }
                 }
-                if (destination == NUMBER_OF_FLOOR + 1) {
-                    destination = getPressedButtonUp(numberFloor);
+                if (destination > elevator.getCurrentFloor() + 1
+                        && elevator.getPassengers().size() < 5) {
+                    destination = getPressedButtonUp(elevator.getCurrentFloor(), destination);
                     if (destination == NUMBER_OF_FLOOR + 1) {
                         elevator.setDirection(Directions.DOWN);
+                        if (destination == NUMBER_OF_FLOOR + 1) {
+                            elevator.setDirection(Directions.DOWN);
+                        }
+                    } else {
+                        elevator.setDestination(destination);
                     }
                 } else {
                     elevator.setDestination(destination);
@@ -108,15 +113,20 @@ public class Main {
             if (elevator.getDirection() == Directions.DOWN) {
                 destination = 0;
                 for (Passenger current : elevator.getPassengers()) {
-                    if (current.getDestination() < numberFloor
-                            && current.getDestination() > destination) {
+                    if (current.getDestination() > destination) {
                         destination = current.getDestination();
                     }
                 }
-                if (destination == 0) {
-                    destination = getPressedButtonDown(numberFloor);
+                if (destination < elevator.getCurrentFloor() - 1
+                        && elevator.getPassengers().size() < 5) {
+                    destination = getPressedButtonDown(elevator.getCurrentFloor(), destination);
                     if (destination == 0) {
                         elevator.setDirection(Directions.UP);
+                        if (destination == 0) {
+                            elevator.setDirection(Directions.UP);
+                        }
+                    } else {
+                        elevator.setDestination(destination);
                     }
                 } else {
                     elevator.setDestination(destination);
@@ -125,9 +135,12 @@ public class Main {
         }
     }
 
-    private static int getPressedButtonUp(int numberFloor) {
-        int result = NUMBER_OF_FLOOR + 1;
-        for (int i = numberFloor - 1; i < NUMBER_OF_FLOOR; i++) {
+    private static int getPressedButtonUp(int current, int destination) {
+        int result = destination;
+        if (destination > MAX_INDEX_FLOOR) {
+            destination = MAX_INDEX_FLOOR;
+        }
+        for (int i = destination; i > current; i--) {
             if (floorArray[i].isButonUp()) {
                 if (i < result) {
                     result = i;
@@ -137,9 +150,9 @@ public class Main {
         return result;
     }
 
-    private static int getPressedButtonDown(int numberFloor) {
-        int result = 0;
-        for (int i = numberFloor - 1; i > 0; i--) {
+    private static int getPressedButtonDown(int current, int destination) {
+        int result = destination;
+        for (int i = current - 1; i > destination; i--) {
             if (floorArray[i].isButonDown()) {
                 if (i > result) {
                     result = i;
@@ -196,6 +209,7 @@ public class Main {
         }
         for (int e = 0; e < elevator.getPassengers().size(); e++) {
             elevatorString.append(elevator.getPassengers().get(e).getDestination());
+            elevatorString.append(" ");
         }
         for (int i = floorArray.length - 1; i >= 0; i--) {
             floorString = new StringBuilder();
