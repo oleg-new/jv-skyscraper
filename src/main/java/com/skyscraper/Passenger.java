@@ -1,3 +1,5 @@
+package com.skyscraper;
+
 public class Passenger {
     private int destination;
 

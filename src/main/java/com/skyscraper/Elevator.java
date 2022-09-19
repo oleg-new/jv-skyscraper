@@ -1,3 +1,5 @@
+package com.skyscraper;
+
 import java.util.List;
 
 public class Elevator {
@@ -50,7 +52,7 @@ public class Elevator {
     @Override
     public String toString() {
 
-        return "Elevator{"
+        return "oleg_new.skyscraper.Elevator{"
                 + "  passengers=" + passengers.toString()
                 + ", currentFloor=" + currentFloor
                 + ", destination=" + destination

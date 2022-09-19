@@ -1,3 +1,5 @@
+package com.skyscraper;
+
 import java.util.List;
 
 public interface Floor {

@@ -1,3 +1,5 @@
+package com.skyscraper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -219,16 +221,16 @@ public class Main {
                 floorNumberString.append(" ");
             }
             if (floorArray[i].isButonDown() && floorArray[i].isButonUp()) {
-                floorNumberString.append("|   /\\ | \\/ ");
+                floorNumberString.append("|  /\\ | \\/ ");
             }
             if (!floorArray[i].isButonDown() && !floorArray[i].isButonUp()) {
-                floorNumberString.append("|      |    ");
+                floorNumberString.append("|     |    ");
             }
             if (!floorArray[i].isButonDown() && floorArray[i].isButonUp()) {
-                floorNumberString.append("|   /\\ |    ");
+                floorNumberString.append("|  /\\ |    ");
             }
             if (floorArray[i].isButonDown() && !floorArray[i].isButonUp()) {
-                floorNumberString.append("|      | \\/ ");
+                floorNumberString.append("|     | \\/ ");
             }
             floorString = new StringBuilder();
             for (int j = 0; j < floorArray[i].getPassengerList().size(); j++) {

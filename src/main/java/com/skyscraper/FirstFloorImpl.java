@@ -1,42 +1,38 @@
+package com.skyscraper;
+
 import java.util.List;
 
-public class LastFloorImpl implements Floor {
-    private boolean butonDown;
+public class FirstFloorImpl implements Floor {
+    private boolean butonUp;
     private List<Passenger> passengerList;
     private int number;
 
-    public LastFloorImpl(boolean butonDown, List<Passenger> passengerList, int number) {
-        this.butonDown = butonDown;
+    public FirstFloorImpl(boolean butonUp, List<Passenger> passengerList, int number) {
+        this.butonUp = butonUp;
         this.passengerList = passengerList;
         this.number = number;
     }
 
-    @Override
-    public boolean isButonDown() {
-        return butonDown;
+    public boolean isButonUp() {
+        return butonUp;
     }
 
-    @Override
-    public void setButonDown(boolean butonDown) {
-        this.butonDown = butonDown;
+    public void setButonUp(boolean butonUp) {
+        this.butonUp = butonUp;
     }
 
-    @Override
     public List<Passenger> getPassengerList() {
         return passengerList;
     }
 
-    @Override
     public void setPassengerList(List<Passenger> passengerList) {
         this.passengerList = passengerList;
     }
 
-    @Override
     public int getNumber() {
         return number;
     }
 
-    @Override
     public void setNumber(int number) {
         this.number = number;
     }

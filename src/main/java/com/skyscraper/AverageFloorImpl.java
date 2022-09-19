@@ -1,3 +1,5 @@
+package com.skyscraper;
+
 import java.util.List;
 
 public class AverageFloorImpl implements Floor {
